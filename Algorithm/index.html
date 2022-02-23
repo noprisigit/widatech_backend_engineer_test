@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section 3</title>
+</head>
+
+<body>
+
+  <script>
+
+    let output = [];
+
+    function findCombination(l, t, array, temp, last) {
+
+      
+      if (l == 0 && t == 0) {
+
+        output.push(array);
+        
+        for (let i = 0; i < array.length; i++) {
+          document.write(array[i] + " ");
+        }
+        document.write("</br>");
+        return;
+      }
+
+      if (l <= 0 || t <= 0)
+        return;
+
+      for (let i = last; i <= 9; i++) {
+
+        if (!temp[i]) {
+
+          temp[i] = true;
+
+          array.push(i);
+
+          findCombination(l - 1, t - i, array, temp, i + 1);
+
+          array.pop();
+
+          temp[i] = false;
+        }
+      }
+    }
+
+    function section3(l, t) {
+
+      if (l * 9 < t) {
+        document.write("Impossible");
+        return;
+      }
+
+      let temp = new Array(10);
+      temp.fill(false);
+
+      let array = [];
+
+      findCombination(l, t, array, temp, 1);
+
+      return;
+    }
+
+    let l = 3, t = 9;
+
+    section3(l, t);
+  </script>
+</body>
+
+</html>
